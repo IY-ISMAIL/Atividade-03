@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/xenial64"
+    config.vm.define "keycloack-server"
+    config.vm.network "private_network", ip: "172.72.72.10"
+    config.vm.provision "shell", inline: <<-SHELL
+     sudo apt-get update -y
+     sudo apt install -y docker docker-compose
+     sudo usermod -aG doker $USER
+     SHELL
+     config.vm.provider "virtualbox" do |vb|
+       vb.memory = "2048"
+       vb.cpus = "1"
+       vb.name = "keycloack-server"
+  end
+  end
